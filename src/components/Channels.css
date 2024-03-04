@@ -1,7 +1,13 @@
 .channel-list{
     display: flex;
-    flex-wrap: wrap;
-    flex: auto;
+    flex-wrap: wrap; 
     justify-content: center;
     gap: 2rem;
+    margin: 30px;
+}
+
+@media screen and (max-width: 768px){
+.channel-list{
+    gap: 0;
+}
 }
