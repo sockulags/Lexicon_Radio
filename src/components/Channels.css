@@ -1,13 +1,28 @@
 .channel-list{
     display: flex;
     flex-wrap: wrap; 
-    justify-content: center;
-    gap: 2rem;
-    margin: 30px;
+    gap: 2rem;      
+    justify-content: center; 
+    align-items: center;   
+    width: calc(100% - 150px);
+    max-width: 1300px;
+}
+
+.channel-list:last-child {
+    justify-self: flex-start; /* Or justify-content: left */
 }
 
 @media screen and (max-width: 768px){
 .channel-list{
     gap: 0;
+    width: calc(100% - 100px);
+ 
 }
 }
+@media screen and (max-width: 480px){
+    .channel-list{
+        gap: 0;
+        width: calc(100% - 30px);
+     
+    }
+    }

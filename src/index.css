@@ -9,8 +9,9 @@
 body{
     background-color: #0f0f0f;
 }
-.root{
-
+#root{
+display:flex;
+justify-content: center;
 }
 ::-webkit-scrollbar {
     width: 8px;
