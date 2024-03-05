@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { IChannel } from './interface';
 import { Channels } from './components/Channels';
+import { Navbar } from './components/Navbar';
+
 import "./index.css";
 
 export function App() {
@@ -32,7 +34,8 @@ export function App() {
 
   return (
     <>
+    <Navbar/>
     <Channels channels={channels}/>
-    </>
+     </>
   )
 }

@@ -1,0 +1,10 @@
+.mediaplayer-container{
+    position: fixed !important;
+    bottom: 0;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+}

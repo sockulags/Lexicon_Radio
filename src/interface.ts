@@ -4,7 +4,7 @@ export interface IChannel{
     color: string;
     image: string;
     imagetemplate: string;
-    liveAudio: IAudio;
+    liveaudio: IAudio;
     name: string;
     tagline: string;
 }
