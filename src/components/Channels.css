@@ -9,7 +9,7 @@
 }
 
 .channel-list:last-child {
-    justify-self: flex-start; /* Or justify-content: left */
+    justify-self: flex-start; 
 }
 
 @media screen and (max-width: 768px){

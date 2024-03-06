@@ -3,13 +3,15 @@ import React, { useState, createContext, ReactNode } from 'react';
 interface PlayStateContextType {
     isPlaying: boolean;
     audioSrc: string;
-    playAudio: (audioSrc: string) => void;
+    channelName: string;
+    playAudio: (audioSrc: string, name:string) => void;
     pauseAudio: () => void;
 }
 
 export const PlayStateContext = createContext<PlayStateContextType>({
     isPlaying: false,
     audioSrc: "", 
+    channelName: "",
     playAudio: () => {},
     pauseAudio: () => {},
 });
@@ -23,10 +25,12 @@ interface PlayStateProviderProps {
 export const PlayStateProvider: React.FC<PlayStateProviderProps> = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [audioSrc, setAudioSrc] = useState<string>("");
+    const[channelName, setChannelName]  = useState<string>("");
 
-    const playAudio = (audioSrc: string) => {
+    const playAudio = (audioSrc: string, name: string) => {
         setIsPlaying(true);
         setAudioSrc(audioSrc);
+        setChannelName(name);
     };
 
     const pauseAudio = () => {
@@ -34,7 +38,7 @@ export const PlayStateProvider: React.FC<PlayStateProviderProps> = ({ children }
     };
 
     return (
-        <PlayStateContext.Provider value={{ isPlaying, audioSrc, playAudio, pauseAudio }}>
+        <PlayStateContext.Provider value={{ isPlaying, audioSrc, playAudio, pauseAudio, channelName }}>
             {children}
         </PlayStateContext.Provider>
     );

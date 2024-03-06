@@ -11,16 +11,11 @@ export function Channel({ props }: ChannelProps) {
     const { isPlaying,  audioSrc,  playAudio, pauseAudio } = usePlayState(); 
 
     const handleButtonClick = () => { 
-        console.log(isPlaying);
-        console.log(audioSrc);
-        console.log(props.liveaudio.url);
-        console.log(isPlaying && audioSrc === props.liveaudio.url)
-        if (isPlaying && audioSrc === props.liveaudio.url) {
+         if (isPlaying && audioSrc === props.liveaudio.url) {
             pauseAudio();
            
         } else {
-            playAudio(props.liveaudio.url); 
-            
+            playAudio(props.liveaudio.url, props.name);             
         }
        
     };

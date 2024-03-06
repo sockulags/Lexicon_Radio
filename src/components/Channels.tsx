@@ -1,6 +1,6 @@
 import { IChannel } from '../interface';
 import { Channel } from './Channel';
-import { MediaPlayer } from './MediaPlayer';
+
 import "./Channels.css";
 
 interface ChannelProps {
@@ -18,7 +18,7 @@ export function Channels({ channels }: ChannelProps) {
                 <Channel props={channel} />
             ))}
         </div>
-        <MediaPlayer/>
+       
         </>
     );
 }

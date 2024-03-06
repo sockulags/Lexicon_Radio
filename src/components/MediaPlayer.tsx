@@ -4,7 +4,7 @@ import "./MediaPlayer.css";
 
 export function MediaPlayer() {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const { isPlaying, playAudio, pauseAudio, audioSrc } = usePlayState();
+    const { isPlaying, playAudio, pauseAudio, audioSrc, channelName } = usePlayState();
 
     const [isMute, setIsMute] = useState<boolean>(false);
     const [volume, setVolume] = useState<number>(0.5);   
@@ -25,7 +25,7 @@ export function MediaPlayer() {
                 pauseAudio();
             } else {
                 audioRef.current.src = audioSrc;             
-                playAudio(audioSrc);
+                playAudio(audioSrc, channelName);
             }
         }
     };
@@ -43,12 +43,18 @@ export function MediaPlayer() {
         if (audioRef.current) {
             audioRef.current.volume = newVolume;
         }
+        document.documentElement.style.setProperty('--value', `${newVolume * 100}%`);
     };
 
-    return (
-        <div className="mediaplayer-container">
-            <audio ref={audioRef} autoPlay={isPlaying} src={audioSrc} />
+    const handleClose = () => {
+    playAudio("", "");
+    pauseAudio();
+    }
 
+    return (
+        <div className="mediaplayer-container" style={{display: `${audioSrc.length > 1 ? "": "none"}`}}>
+            <audio ref={audioRef} autoPlay={isPlaying} src={audioSrc} />       
+            <h2>{channelName}</h2>         
             <span className="material-symbols-outlined" onClick={handlePlayState}>
                 {isPlaying ? "pause" : "play_arrow"}
             </span>
@@ -65,11 +71,12 @@ export function MediaPlayer() {
                 value={volume}
                 onChange={handleVolumeChange}
             />
-
+{/* 
             <span className="time-control">
                 <span className="current-time">0:00</span>/
                 <span className="end-time">12:45</span>{" "}
-            </span>
+            </span> */}
+            <span className="material-symbols-outlined close" onClick={handleClose}>close</span>
         </div>
     );
 }

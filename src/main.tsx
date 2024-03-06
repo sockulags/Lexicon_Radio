@@ -1,15 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import { PlayStateProvider } from './context/PlayStateContext';
 import { App } from "./App.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <React.StrictMode>  
     <PlayStateProvider>
     <App />
-    </PlayStateProvider>
-    </BrowserRouter>
+    </PlayStateProvider>   
   </React.StrictMode>
 );
