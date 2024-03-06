@@ -1,27 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { usePlayState } from '../utils/playStateContext'; 
 import "./MediaPlayer.css";
 
-interface MediaPlayerProps {
-    src: string;
-}
-
-export function MediaPlayer({ src }: MediaPlayerProps) {
+export function MediaPlayer() {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const { isPlaying, togglePlayState } = usePlayState();
+    const { isPlaying, playAudio, pauseAudio, audioSrc } = usePlayState();
 
     const [isMute, setIsMute] = useState<boolean>(false);
-    const [volume, setVolume] = useState<number>(0.5);
-   
+    const [volume, setVolume] = useState<number>(0.5);   
+
+
+    useEffect(() => {
+        if(isPlaying) {
+            audioRef.current?.play();
+        } else{
+            audioRef.current?.pause();
+        }
+    })
+
     const handlePlayState = () => {
-        console.log(audioRef.current?.src)
+        console.log(audioRef.current)
         if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.pause();
+            if (isPlaying) {           
+                pauseAudio();
             } else {
-                audioRef.current.play();
+                audioRef.current.src = audioSrc;             
+                playAudio(audioSrc);
             }
-            togglePlayState(); 
         }
     };
 
@@ -42,14 +47,14 @@ export function MediaPlayer({ src }: MediaPlayerProps) {
 
     return (
         <div className="mediaplayer-container">
-            <audio ref={audioRef} autoPlay={isPlaying} src={src} />
+            <audio ref={audioRef} autoPlay={isPlaying} src={audioSrc} />
 
             <span className="material-symbols-outlined" onClick={handlePlayState}>
                 {isPlaying ? "pause" : "play_arrow"}
             </span>
 
             <span className="material-symbols-outlined" onClick={handleMuteState}>
-                {isMute ? "volume_off" : volume >= 0.5 ? "volume_up" : "volume_down"}
+                {isMute || volume === 0 ? "volume_off" : volume >= 0.5 ? "volume_up" : "volume_down"}
             </span>
 
             <input

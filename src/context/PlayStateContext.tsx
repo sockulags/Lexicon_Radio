@@ -1,16 +1,20 @@
-import React, { useState, createContext, useContext, ReactNode } from 'react';
+import React, { useState, createContext, ReactNode } from 'react';
 
 interface PlayStateContextType {
     isPlaying: boolean;
-    togglePlayState: () => void;
+    audioSrc: string;
+    playAudio: (audioSrc: string) => void;
+    pauseAudio: () => void;
 }
 
 export const PlayStateContext = createContext<PlayStateContextType>({
     isPlaying: false,
-    togglePlayState: () => {},
+    audioSrc: "", 
+    playAudio: () => {},
+    pauseAudio: () => {},
 });
 
-export const usePlayState = () => useContext(PlayStateContext);
+
 
 interface PlayStateProviderProps {
     children: ReactNode;
@@ -18,13 +22,19 @@ interface PlayStateProviderProps {
 
 export const PlayStateProvider: React.FC<PlayStateProviderProps> = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [audioSrc, setAudioSrc] = useState<string>("");
 
-    const togglePlayState = () => {
-        setIsPlaying(prevState => !prevState);
+    const playAudio = (audioSrc: string) => {
+        setIsPlaying(true);
+        setAudioSrc(audioSrc);
+    };
+
+    const pauseAudio = () => {
+        setIsPlaying(false);
     };
 
     return (
-        <PlayStateContext.Provider value={{ isPlaying, togglePlayState }}>
+        <PlayStateContext.Provider value={{ isPlaying, audioSrc, playAudio, pauseAudio }}>
             {children}
         </PlayStateContext.Provider>
     );

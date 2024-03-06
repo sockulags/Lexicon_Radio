@@ -1,23 +1,28 @@
-import  { useState } from 'react';
 import { IChannel } from '../interface';
 import { usePlayState } from '../utils/playStateContext';
 
 import "./Channel.css";
 
 interface ChannelProps {
-    props: IChannel;
-    audioToggle: (audio: string) => void;
+    props: IChannel;   
 }
 
-export function Channel({ props, audioToggle }: ChannelProps) {
-    const { isPlaying, togglePlayState } = usePlayState(); 
+export function Channel({ props }: ChannelProps) {
+    const { isPlaying,  audioSrc,  playAudio, pauseAudio } = usePlayState(); 
 
-    const [isLocalPlaying, setLocalPlaying] = useState<boolean>(false); 
-
-    const handleButtonClick = () => {
-        audioToggle(props.liveaudio.url); 
-        setLocalPlaying(!isLocalPlaying); 
-        togglePlayState(); 
+    const handleButtonClick = () => { 
+        console.log(isPlaying);
+        console.log(audioSrc);
+        console.log(props.liveaudio.url);
+        console.log(isPlaying && audioSrc === props.liveaudio.url)
+        if (isPlaying && audioSrc === props.liveaudio.url) {
+            pauseAudio();
+           
+        } else {
+            playAudio(props.liveaudio.url); 
+            
+        }
+       
     };
 
     return (
@@ -30,7 +35,7 @@ export function Channel({ props, audioToggle }: ChannelProps) {
                 <p>{props.tagline}</p>
                 <button className="play-btn" onClick={handleButtonClick}>
                     <span className="material-symbols-outlined">
-                        {isPlaying ? "pause" : "play_arrow"}
+                        {isPlaying && audioSrc === props.liveaudio.url ? "pause" : "play_arrow"}
                     </span>
                     Live
                 </button>
