@@ -1,8 +1,31 @@
-.horizontal-scrollbar{
-    position: relative;
-    left: 10%;
-    display: flex;
-    flex-wrap: nowrap;
-    height: fit-content;
+.broadcast-container{
+    width: calc(100vw -8px);
+    margin-bottom: 40px;
+}
 
+
+.horizontal-scrollbar{ 
+    
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    margin-top: 1px;
+    display: flex;
+    flex-direction: row;
+}
+
+.horizontal-scrollbar:last-child{
+    color: red;
+}
+
+.lastpublished-container{
+    h1,
+    h2{
+        margin-left: 50px;
+        margin-bottom: 8px;
+    }
+    h2{
+        margin-left: 55px;
+    }
 }

@@ -22,20 +22,18 @@ export function Broadcast({props}: BroadcastProps) {
 
     console.log('Broadcast:', props);
     return (
-        <div className='broadcast-container'>
-           <div className='image-container'>
-                <img src={props.imageurl} />
+        <div className='broadcast-card'>          
+           
+            <div className='image-container'>
+                <img src={props.imageurl} alt={props.program.name} />
             </div>
-            <div className="text-container">
-                <h2>{props.program.name}</h2>
-                <p>{props.description}</p>
-                <button className="play-btn" onClick={handleButtonClick}>
+            <h2>{props.program.name}</h2>
+            <button className="play-btn" onClick={handleButtonClick}>
                     <span className="material-symbols-outlined">
                         {isPlaying && audioSrc === props.broadcast.broadcastfiles[0].url ? "pause" : "play_arrow"}
                     </span>
                     Spela upp
                 </button>
-            </div>
         </div>
     );
 }

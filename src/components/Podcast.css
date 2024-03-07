@@ -1,0 +1,4 @@
+.podcast-container{
+    width: calc(100vw -8px);;
+    margin-bottom: 40px;
+}

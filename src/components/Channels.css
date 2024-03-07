@@ -6,6 +6,7 @@
     align-items: center;   
     width: calc(100% - 150px);
     max-width: 1300px;
+    margin: 0 auto;
 }
 
 .channel-list:last-child {

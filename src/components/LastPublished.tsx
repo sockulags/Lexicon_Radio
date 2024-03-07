@@ -26,15 +26,21 @@ export function LastPublished({ props }: LastPublishedProps) {
         <div className='lastpublished-container'>
            <h1>Senast uppladdat</h1>
            <h2>Sändningar</h2>
+           <div className="broadcast-container">
            <div className="horizontal-scrollbar">
            {broadcasts.map(broadcasts => {
             return <Broadcast props={broadcasts}/>
            })}
 </div>
+</div>
             <h2>Poddar</h2>
+            <div className="podcast-container">
+           <div className="horizontal-scrollbar">
            {podcasts.map(podcast => {
-            return <Podcast props={podcast}/>
-           })}
+               return <Podcast props={podcast}/>
+            })}
+            </div>
+            </div>
         </div>
     );
 }
